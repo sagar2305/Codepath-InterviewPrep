@@ -11,19 +11,6 @@ Given n will always be valid.
 Try to do this in one pass.
 */
 
-/**
- * Definition for singly-linked list.
- * public class ListNode {
- *     public var val: Int
- *     public var next: ListNode?
- *     public init(_ val: Int) {
- *         self.val = val
- *         self.next = nil
- *     }
- * }
- */
-
-//Given linked list: 1->2->3->4->5, and n = 2.
 class Solution {
     func removeNthFromEnd(_ head: ListNode?, _ n: Int) -> ListNode? {
         

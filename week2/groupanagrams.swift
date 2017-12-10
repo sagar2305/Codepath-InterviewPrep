@@ -12,6 +12,7 @@ Return:
 Note: All inputs will be in lower-case.
 */
 
+
 class Solution {
     func groupAnagrams(_ strs: [String]) -> [[String]] {
         
@@ -29,6 +30,8 @@ class Solution {
             newstr[i] = string
         }
         
+        
+        // or you can just store the old index in a dictionary
         let sorted = newstr.enumerated().sorted(by: {$0.element < $1.element})
         let sortedIndexes = sorted.map{$0.offset}
         newstr = newstr.sorted()

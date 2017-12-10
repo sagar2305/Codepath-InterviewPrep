@@ -1,0 +1,70 @@
+/*
+Given an array nums and a target value k, find the maximum length of a subarray that sums to k. If there isn't one, return 0 instead.
+
+Note:
+The sum of the entire nums array is guaranteed to fit within the 32-bit signed integer range.
+
+Example 1:
+Given nums = [1, -1, 5, -2, 3], k = 3,
+return 4. (because the subarray [1, -1, 5, -2] sums to 3 and is the longest)
+
+Example 2:
+Given nums = [-2, -1, 2, 1], k = 1,
+return 2. (because the subarray [-1, 2] sums to 1 and is the longest)
+
+Follow Up:
+Can you do it in O(n) time?
+*/
+
+
+class Solution {
+    func maxSubArrayLen(_ nums: [Int], _ k: Int) -> Int {
+        
+//         var maxSubarrayLength = 0
+        
+//         for i in 0..<nums.count {
+//             var sum = 0 // imp
+            
+//             for j in i..<nums.count { //mst j in i too
+//                 sum += nums[j]
+                
+//                 if sum == k {
+//                     var currSubarrayLength = j - i + 1
+//                     maxSubarrayLength = maxSubarrayLength > currSubarrayLength ? maxSubarrayLength : currSubarrayLength
+//                 }
+//             }
+//         }
+        
+//         return maxSubarrayLength
+        
+        // [3]
+        // [2, -1, 4, -2, 2]  // k =3
+        
+        //http://www.geeksforgeeks.org/find-the-largest-subarray-with-0-sum/
+        
+        var map = [Int: Int]()
+        var maxSubArray = 0
+        var sum = 0
+        for i in 0..<nums.count {
+            sum += nums[i]
+            if sum == k {
+                var currMax = i + 1
+                maxSubArray = maxSubArray > currMax ? maxSubArray : currMax
+            }
+            
+            // if sums - k exists
+            var diff = sum - k
+            if let diffIndex = map[diff] {
+                var currMax = i - diffIndex  //mst sum is greater than k so discarding one
+                maxSubArray = maxSubArray > currMax ? maxSubArray : currMax
+            } 
+            
+            //vimp if the same sum exists in the map keep that index as it will be the larger substring
+            if map[sum] == nil {
+                map[sum] = i
+            }
+        }
+        
+        return maxSubArray
+    }
+}
